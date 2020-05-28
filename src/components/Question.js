@@ -1,14 +1,18 @@
 import React from 'react';
+import './../spinner.css'
 
-const sampleAnswers = ['One', 'Two', 'Three', 'Four'];
+export default function Question({ data, title, loading, computateResult}) {
 
-export default function Question() {
   return (
     <div className="question">
-      <h2>Question Here</h2>
+      {!loading && <h2 dangerouslySetInnerHTML={{ __html: title }} />}
+      
+      {/* Loading HTML Class */}
+      { loading && <div className="lds-spinner"><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div> }
+      
 
-      {sampleAnswers.map((answer, index) => (
-        <button key={index}>answer</button>
+      {!loading && data.map((question, index) => (
+        <button key={index} onClick={() => computateResult(index)}>{question}</button>
       ))}
     </div>
   );
